@@ -5,5 +5,5 @@ export interface UserEntity {
     password?: string;
     role: string;
     registerToken?: string;
-    favoritesCardsIds: string[];
+    favoritesCardsIds?: string[];
 }
