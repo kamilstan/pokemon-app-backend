@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import { handleError } from './utils/handleErrors';
 
 import morgan = require("morgan");
+import {registrationRouter} from "./routers/registration.router";
 
 const app = express();
 
@@ -34,7 +35,7 @@ app.use(
 //routers
 const router = Router();
 
-// router.use('/registration', registrationRouter);
+router.use('/registration', registrationRouter);
 
 
 app.use('/api', router);
