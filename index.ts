@@ -9,6 +9,7 @@ import { handleError } from './utils/handleErrors';
 
 import morgan = require("morgan");
 import {registrationRouter} from "./routers/registration.router";
+import {loginRouter} from "./routers/login.router";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(
 const router = Router();
 
 router.use('/registration', registrationRouter);
+router.use('/login', loginRouter);
 
 
 app.use('/api', router);

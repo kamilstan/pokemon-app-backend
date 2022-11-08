@@ -6,7 +6,7 @@ import {hashPassword} from "../utils/bcrypt-functions";
 
 export const registrationRouter = Router()
 
-    .post('/user/registration', async (req, res) => {
+    .post('/user', async (req, res) => {
 
 
         if (req.body.password !== req.body.confirmPassword) {
@@ -23,7 +23,7 @@ export const registrationRouter = Router()
         if (await UserRecord.getOneByEmail(req.body.email)) {
             throw new ValidationError('Użytkownik o takim emailu juz istnieje!');
         }
-        if (!req.body.userName) {
+        if (!req.body.username) {
             throw new ValidationError('Username jest wymagany!');
         };
 
@@ -33,7 +33,7 @@ export const registrationRouter = Router()
             username: req.body.username,
             email: req.body.email,
             password: hash,
-            role: 'customer',
+            role: 'user',
         };
         const addUser = new UserRecord(user);
 
