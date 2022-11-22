@@ -4,7 +4,7 @@
 # Don't track content of these folders
 /.history
 .idea
-tsconfig.json
+
 # Don't track content of these files
 config/config.ts
 
