@@ -13,7 +13,7 @@ export class UserRecord implements UserEntity {
     password?: string;
     role: string;
     registerToken?: string;
-    favoritesCardsIds?: string[];
+    favoritesCardsIds?: string;
 
     constructor(obj: UserEntity) {
         if (!obj.email || obj.email.length > 255) {
@@ -48,7 +48,7 @@ export class UserRecord implements UserEntity {
         this.registerToken = this.registerToken ?? uuid();
         this.id = this.id ?? uuid();
         await pool.execute(
-            'INSERT INTO `user` (`id`, `username`, email`, `password`,`role`,`registerToken`, `favoritesCardsIds`) VALUES(:id,:username, :email, :password, :role, :registerToken, :favoritesCardsIds)',
+            'INSERT INTO `user` (`id`, `username`, `email`, `password`,`role`,`registerToken`, `favoritesCardsIds`) VALUES(:id,:username, :email, :password, :role, :registerToken, :favoritesCardsIds)',
             {
                 ...this,
                 registerToken: this.registerToken,
@@ -71,12 +71,11 @@ export class UserRecord implements UserEntity {
         return results.length === 0 ? null : new UserRecord(results[0]);
     }
 
-    static async updateOneRegister(password: string, id: string, registerToken: string | null, favoritesCardsIds: string[] | null): Promise<void> {
-        await pool.execute('UPDATE`user`SET`password`=:password, `registerToken`= :registerToken, `favoritesCardsIds`= :favoritesCardsIds WHERE`id`=:id', {
-            password: password,
-            registerToken: null,
-            id: id,
-            favoritesCardsIds: favoritesCardsIds,
+    async updateFavorites(): Promise<void> {
+        await pool.execute('UPDATE `user` SET `favoritesCardsIds`= :favoritesCardsIds WHERE `id`=:id', {
+            id: this.id,
+            favoritesCardsIds: this.favoritesCardsIds,
         });
     }
+
 }

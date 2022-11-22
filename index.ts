@@ -10,6 +10,8 @@ import { handleError } from './utils/handleErrors';
 import morgan = require("morgan");
 import {registrationRouter} from "./routers/registration.router";
 import {loginRouter} from "./routers/login.router";
+import {userRouter} from "./routers/user.router";
+import {cardRouter} from "./routers/card.router";
 
 const app = express();
 
@@ -38,6 +40,8 @@ const router = Router();
 
 router.use('/registration', registrationRouter);
 router.use('/login', loginRouter);
+router.use('/user', userRouter);
+router.use('/card', cardRouter);
 
 
 app.use('/api', router);
