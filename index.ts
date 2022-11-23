@@ -12,6 +12,7 @@ import {registrationRouter} from "./routers/registration.router";
 import {loginRouter} from "./routers/login.router";
 import {userRouter} from "./routers/user.router";
 import {cardRouter} from "./routers/card.router";
+import {config} from "./config/config";
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin: config.corsOrigin,
         credentials: true,
     })
 );
